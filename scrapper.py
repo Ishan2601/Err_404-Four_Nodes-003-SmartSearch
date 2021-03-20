@@ -26,7 +26,7 @@ class Scrapper:
             for i in self.question_words:
                 if i in result:
                     final_result[i].extend(result[i])
-        return final_result[:-1]
+        return final_result
 
     def search_term(self, search_term : str):
         google_search_ques = self.__get_google_search_ques(search_term)
