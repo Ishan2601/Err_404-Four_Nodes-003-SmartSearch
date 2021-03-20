@@ -13,9 +13,9 @@ def home():
 @app.route('/search', methods=['POST'])
 def search():
     if request.method == "POST":
-        name = request.form.get("searchquery")
+        result = request.form.get("searchquery")
         
-    return render_template("index.html", name = name)
+    return render_template("index.html", result = result)
 	
  
 if __name__=='__main__':  
