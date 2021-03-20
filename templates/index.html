@@ -7,9 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
+	
     <title>Smart Search</title>
-  <style>
+	<style>
         body {
               background-color: #E6E6FA;
         }
@@ -19,7 +19,7 @@
               margin-bottom: 10px; 
               margin-top: 50px;
         }
-  </style>
+	</style>
   </head>
   <body>
       <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
@@ -32,7 +32,11 @@
                 <input type="text" class="form-control" name = "searchquery" id="searchquery" placeholder="Search Here" required>
               </div>
               <button type="submit" class="btn btn-primary">Search</button>
-          </form>          
+          </form> 
+          {% if result %}
+              <br>
+              <a class="btn btn-outline-info" href="/getPlotCSV">Get CSV</a>
+              {% endif %}         
         </div>
       </div>
 
@@ -42,6 +46,7 @@
           <h4 class="card-title">Smart Search Results for:{{searched}}</h4>
           <hr>
           <h5>People also search for</h5>
+          
           <hr>
           {% if top_result %}
           {% for i in top_result[searched]['top']['topic_title']  %}
@@ -49,11 +54,13 @@
           {% endfor %}
           {% endif %}
           {% for key, value in result.items() %}
-            <h5 style="padding: 0.5%">{{ key }}</h5>
+            {% if result[key] %}
+                <h5 style="padding: 0.5%">{{ key }}</h5>
                 {% for i in value %}
                 <a href='http://google.com/search?q={{i}}' target="new" style="padding: 0.5%">{{ i }}?</a><br>
                 {% endfor %}
                <hr>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
