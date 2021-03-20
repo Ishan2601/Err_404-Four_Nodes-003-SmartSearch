@@ -1,10 +1,10 @@
 from selenium import webdriver
-#from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options
 from time import sleep
 from config import GoogleSearchConfig, YahooSearchConfig
 from os import environ
 
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 
 class Scrapper:
     question_words = ["How", "What", "Why", "When", "Where", "Which", "Is"]
