@@ -29,7 +29,7 @@ class Scrapper:
         return final_result
 
     def search_term(self, search_term : str):
-        google_search_ques = self.__get_google_search_ques(search_term)
+        #google_search_ques = self.__get_google_search_ques(search_term)
         yahoo_search_ques = self.__get_yahoo_search_ques(search_term)
         
         questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
