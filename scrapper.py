@@ -1,5 +1,5 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+#from selenium.webdriver.chrome.options import Options
 from time import sleep
 from config import GoogleSearchConfig, YahooSearchConfig
 from os import environ
@@ -12,13 +12,13 @@ class Scrapper:
     def __init__(self):
         self.options = Options()
         self.options.headless = True
-        # self.options.add_argument('--disable-gpu')
-        # self.options.add_argument('--no-sandbox')
-        # self.options.add_argument("--disable-dev-shm-usage")
-        # self.options.binary_location = environ.get("GOOGLE_CHROME_BIN")
-        # self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=self.options)
+        self.options.add_argument('--disable-gpu')
+        self.options.add_argument('--no-sandbox')
+        self.options.add_argument("--disable-dev-shm-usage")
+        self.options.binary_location = environ.get("GOOGLE_CHROME_BIN")
+        self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=self.options)
         
-        self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=self.options)  
+        #self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=self.options)  
 
     def __result_combiner(self, *args):
         final_result = {i:[] for i in self.question_words}
