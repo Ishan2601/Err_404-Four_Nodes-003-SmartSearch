@@ -43,7 +43,7 @@ def scrape(text):
 	chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 	browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-	question_words = ["How", "What", "Why", "When", "Where", "Which", "Is"]
+	question_words = ["How", "What", "Why", "When", "Where", "Which", "Is", "Does"]
 
 	# Code for google scraper
 	google_config = {
