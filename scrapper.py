@@ -32,9 +32,9 @@ class Scrapper:
         #google_search_ques = self.__get_google_search_ques(search_term)
         yahoo_search_ques = self.__get_yahoo_search_ques(search_term)
         
-        questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
+        #questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
 
-        return questions
+        return yahoo_search_ques
 
     def __get_google_search_ques(self, search_term : str):
         config = GoogleSearchConfig()
@@ -64,7 +64,7 @@ class Scrapper:
             print(f"{prepend} {search_term}")
             ques_box = self.brow.find_element_by_name(config.search_box_name)
             ques_box.send_keys(f"{prepend} {search_term}")
-            sleep(2)
+            sleep(1)
             try:
                 search_term_box = self.brow.find_element_by_class_name(config.search_terms_box_class)
                 suggestions = search_term_box.text.split("\n")
