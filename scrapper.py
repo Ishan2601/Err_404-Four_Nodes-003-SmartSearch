@@ -4,7 +4,7 @@ from time import sleep
 from config import GoogleSearchConfig, YahooSearchConfig
 from os import environ
 
-# from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
 class Scrapper:
     question_words = ["How", "What", "Why", "When", "Where", "Which", "Is"]
@@ -12,13 +12,13 @@ class Scrapper:
     def __init__(self):
         self.options = Options()
         self.options.headless = True
-        self.options.add_argument('--disable-gpu')
-        self.options.add_argument('--no-sandbox')
-        self.options.add_argument("--disable-dev-shm-usage")
-        self.options.binary_location = environ.get("GOOGLE_CHROME_BIN")
-        self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=self.options)
+        # self.options.add_argument('--disable-gpu')
+        # self.options.add_argument('--no-sandbox')
+        # self.options.add_argument("--disable-dev-shm-usage")
+        # self.options.binary_location = environ.get("GOOGLE_CHROME_BIN")
+        # self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=self.options)
         
-        # self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=self.options)  
+        self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=self.options)  
 
     def __result_combiner(self, *args):
         final_result = {i:[] for i in self.question_words}
@@ -45,11 +45,13 @@ class Scrapper:
             ques_box = self.brow.find_element_by_name(config.search_box_name)
             ques_box.send_keys(f"{prepend} {search_term}")
             sleep(1)
-            search_term_box = self.brow.find_element_by_class_name(config.search_terms_box_class)
-            suggestions_elems = search_term_box.find_elements_by_class_name(config.search_suggestions)
-            suggestions = [i.text for i in suggestions_elems]
-
-            web[prepend] = suggestions
+            try:
+                search_term_box = self.brow.find_element_by_class_name(config.search_terms_box_class)
+                suggestions_elems = search_term_box.find_elements_by_class_name(config.search_suggestions)
+                suggestions = [i.text for i in suggestions_elems]
+                web[prepend] = suggestions
+            except Exception:
+                pass
             ques_box.clear()
         return web
 
@@ -68,8 +70,7 @@ class Scrapper:
                 suggestions = search_term_box.text.split("\n")
                 web[prepend] = suggestions
             except Exception:
-                print(prepend)
-                continue
+                pass
             
             ques_box.clear()
         return web
