@@ -37,20 +37,21 @@
       </div>
 
       {% if result %}
-      <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
+<div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
         <div class="card-body">
-          <h4 class="card-title">Smart Search Results</h4>
-          <hr>
-          {% for key, value in result.items() %}
-            <h5 style="padding: 0.5%">{{ key }}</h5>
-                {% for i in value %}
-                <a href='http://google.com/search?q={{i}}' target="new" style="padding: 0.5%">{{ i }}?</a><br>
-                {% endfor %}
-                <hr>
-          {% endfor %}
+          
+          {% if result %}
+          <h5 class="card-title">Smart Search Results</h5>
+            <p style="padding: 0.5%">{{ result }}</p>
+          {% endif %}
+         
         </div>
       </div>
        {% endif %}
+
+      
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
