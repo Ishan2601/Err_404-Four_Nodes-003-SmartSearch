@@ -3,7 +3,7 @@ from flask import request, render_template
 from selenium import webdriver
 import os
 from time import sleep
-'''
+
 def scrape_google(text):
 	#text = "Elon Musk"
 
@@ -33,6 +33,7 @@ def scrape_google(text):
 
 	    all_questions[question] = suggestions
 	    ques_box.clear()
+	browser.quit()
 	return all_questions
 '''
 def scrape(text):
@@ -69,7 +70,7 @@ def scrape(text):
 	    all_questions[question] = suggestions
 	    ques_box.clear()
 	return all_questions
-
+'''
 
 
 @app.route('/')
@@ -80,6 +81,6 @@ def home():
 def search():
     if request.method == "POST":
         search_term = request.form.get("searchquery")
-        result = scrape(search_term)
+        result = scrape_google(search_term)
         
     return render_template("index.html", result = result)
