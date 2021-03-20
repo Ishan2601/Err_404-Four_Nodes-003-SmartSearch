@@ -40,8 +40,8 @@ def scrape(text):
 	chromeOptions.add_argument("--headless")
 	chromeOptions.add_argument("--disable-dev-shm-usage")
 	chromeOptions.add_argument("--no-sandbox")
-	chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-	browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+	chromeOptions.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+	browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chromeOptions)
 
 	question_words = ["How", "What", "Why", "When", "Where", "Which", "Is", "Does"]
 
