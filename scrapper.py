@@ -4,6 +4,7 @@ from time import sleep
 from config import GoogleSearchConfig, YahooSearchConfig
 from os import environ
 from pytrends.request import TrendReq
+import people_also_ask
 
 #from webdriver_manager.chrome import ChromeDriverManager
 
@@ -35,8 +36,9 @@ class Scrapper:
         
         questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
         top_searches = self._get_top_searches(search_term)
+        prople_asks = self._people_also_ask(search_term)
 
-        return questions, top_searches
+        return questions, top_searches, prople_asks
 
     def __get_google_search_ques(self, search_term : str):
         config = GoogleSearchConfig()
@@ -84,6 +86,10 @@ class Scrapper:
         web = pytrends.related_topics()
         # web = pytrends.suggestions(kw_list)
         return web
+    
+    def _people_also_ask(self, search_term: str):
+        web = people_also_ask.get_related_questions(search_term, 5)
+        return web  
 
     
 
