@@ -1,6 +1,6 @@
 "# ERR_404-4.0" 
 
-[I am here](https://smart-search-app.herokuapp.com/)
+[Smart Search](https://smart-search-app.herokuapp.com/)
 
 ## How to use
 ```
