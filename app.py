@@ -1,5 +1,5 @@
-# importing Flask and other modules 
-from flask import Flask, request, render_template 
+# importing Flask
+from flask import Flask
 
 # Flask constructor 
 app = Flask(__name__) 
