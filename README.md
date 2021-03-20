@@ -12,10 +12,10 @@ $ app.py
 ## Features Implemented
 1. questions classification
 2. Related top Searches
+3. Generating csv file of questions.
 
 ## Features to be implement 
 1. Lemmatization and Similar questions clustering.
-2. Generating csv, json, xcel files of questions.
-3. complete sentence searching
-4. Better visuals
-5. AWS EC2 (if time permits)
+2. complete sentence searching
+3. Better visuals
+4. AWS EC2 (if time permits)
