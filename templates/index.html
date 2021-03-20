@@ -17,21 +17,7 @@
               margin: 0 auto; 
               float: none; 
               margin-bottom: 10px; 
-              margin-top: 30px;
-        }
-        .cards_all{
-             margin-left: 20px;
-              float: none; 
-              margin-bottom: 10px; 
-              margin-top: 20px;
-              width:30rem;
-              margin-right:5px;
-        }
-        .title {
-          font-size: 22px;
-          font-family: 'Times New Roman', Times, serif;
-          padding-top: 10px;
-          padding-left: 5px;
+              margin-top: 50px;
         }
 	</style>
   </head>
@@ -49,41 +35,29 @@
           </form>          
         </div>
       </div>
+
       {% if result %}
-<div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
-  <h6 style="text-align: center;padding-top:20px;font-size: 22px;"><b>Smart Search Results</b></h6>
+      <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
         <div class="card-body">
-          
-          {% if result %}
-          <h5 class="card-title">Top 10 Searches</h5>
-            <p style="padding: 0.5%">{{ result }}</p>
+          <h4 class="card-title">Smart Search Results for:{{searched}}</h4>
+          <hr>
+          <h5>People also search for</h5>
+          <hr>
+          {% if top_result %}
+          {% for i in top_result[searched]['top']['topic_title']  %}
+            <a href='http://google.com/search?q={{i}}' target="new" type="button" class="btn btn-outline-secondary">{{i}}</a>
+          {% endfor %}
           {% endif %}
-         
+          {% for key, value in result.items() %}
+            <h5 style="padding: 0.5%">{{ key }}</h5>
+                {% for i in value %}
+                <a href='http://google.com/search?q={{i}}' target="new" style="padding: 0.5%">{{ i }}?</a><br>
+                {% endfor %}
+               <hr>
+          {% endfor %}
         </div>
       </div>
        {% endif %}
-
-       <h6 style="text-align: center;padding-top:20px;font-size:22px;"><b>Categorywise Results</b> </h6>
-       <div class="card-group">
-        <div class="card text-center shadow-lg p-6 mb-8" style="margin:10px">
-          <h1 class="title">What</h1>
-          <h2 style="font-size: 15px;">What is your name?</h2>
-          
-        </div>
-        <div class="card text-center shadow-lg p-6 mb-8" style="margin:10px">
-          <h1 class="title">How</h1>
-          <h2 style="font-size: 15px;">How are you?</h2>
-        </div>
-        <div class="card text-center shadow-lg p-6 mb-8" style="margin:10px">
-          <h1 class="title">Why</h1>
-          <h2 style="font-size: 15px;">Why you are crying?</h2>
-        </div>
-      </div>
-    
-
-      
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
