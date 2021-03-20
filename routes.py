@@ -18,7 +18,7 @@ def getPlotCSV():
     with open("CSV/data.csv") as f:
         csv = f.read()
     response = Response(csv, mimetype='text/csv')
-    response.headers.set("Content-Disposition", "attachment", filename="log.csv")
+    response.headers.set("Content-Disposition", "attachment", filename="smart_search.csv")
     return response
     
 
