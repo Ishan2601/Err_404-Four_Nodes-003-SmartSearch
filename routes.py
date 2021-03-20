@@ -15,6 +15,6 @@ def home():
 def search():
     if request.method == "POST":
         search_term = request.form.get("searchquery")
-        result = scrp.search_term(search_term)
+        result, top_result = scrp.search_term(search_term)
         
-    return render_template("index.html", result = result)
+    return render_template("index.html", result = result, top_result = top_result, searched = search_term)
