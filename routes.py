@@ -45,7 +45,7 @@ def scrape(text):
 
 	question_words = ["How", "What", "Why", "When", "Where", "Which", "Is"]
 
-	# Code for google scraping
+	# Code for google scraper
 	google_config = {
 	    'url':"https://www.google.co.in/",
 	    'search_box_name':"q",
