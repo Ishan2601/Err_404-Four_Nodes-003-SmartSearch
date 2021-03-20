@@ -1,7 +1,6 @@
 from app import app
 from flask import request, render_template 
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 import os
 from time import sleep
 '''
@@ -41,8 +40,8 @@ def scrape(text):
 	chromeOptions.add_argument("--headless")
 	chromeOptions.add_argument("--disable-dev-shm-usage")
 	chromeOptions.add_argument("--no-sandbox")
-	#chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-	browser = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chromeOptions)#webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+	chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+	browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 	question_words = ["How", "What", "Why", "When", "Where", "Which", "Is", "Does"]
 

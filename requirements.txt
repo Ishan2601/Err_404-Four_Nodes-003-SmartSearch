@@ -1,9 +1,3 @@
 flask
 gunicorn
-matplotlib
-seaborn
-pandas
-numpy
-scikit_learn
 selenium
-webdriver-manager
