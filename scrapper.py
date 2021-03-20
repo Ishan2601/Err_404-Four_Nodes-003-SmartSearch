@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from time import sleep
 from config import GoogleSearchConfig, YahooSearchConfig
 from os import environ
+from pytrends.request import TrendReq
 
 #from webdriver_manager.chrome import ChromeDriverManager
 
@@ -33,8 +34,9 @@ class Scrapper:
         yahoo_search_ques = self.__get_yahoo_search_ques(search_term)
         
         questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
+        top_searches = self._get_top_searches(search_term)
 
-        return questions
+        return questions, top_searches
 
     def __get_google_search_ques(self, search_term : str):
         config = GoogleSearchConfig()
@@ -73,6 +75,14 @@ class Scrapper:
                 pass
             
             ques_box.clear()
+        return web
+    
+    def _get_top_searches(self, search_term: str):
+        pytrends = TrendReq(hl='en-US', tz=360)
+        kw_list = [search_term]
+        pytrends.build_payload(kw_list)
+        web = pytrends.related_topics()
+        # web = pytrends.suggestions(kw_list)
         return web
 
     

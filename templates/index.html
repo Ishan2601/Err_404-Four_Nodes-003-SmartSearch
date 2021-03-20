@@ -7,9 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
+  
     <title>Smart Search</title>
-	<style>
+  <style>
         body {
               background-color: #E6E6FA;
         }
@@ -19,7 +19,7 @@
               margin-bottom: 10px; 
               margin-top: 50px;
         }
-	</style>
+  </style>
   </head>
   <body>
       <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
@@ -39,14 +39,21 @@
       {% if result %}
       <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
         <div class="card-body">
-          <h4 class="card-title">Smart Search Results</h4>
+          <h4 class="card-title">Smart Search Results for:{{searched}}</h4>
           <hr>
+          <h5>People also search for</h5>
+          <hr>
+          {% if top_result %}
+          {% for i in top_result[searched]['top']['topic_title']  %}
+            <a href='http://google.com/search?q={{i}}' target="new" type="button" class="btn btn-outline-secondary">{{i}}</a>
+          {% endfor %}
+          {% endif %}
           {% for key, value in result.items() %}
             <h5 style="padding: 0.5%">{{ key }}</h5>
                 {% for i in value %}
                 <a href='http://google.com/search?q={{i}}' target="new" style="padding: 0.5%">{{ i }}?</a><br>
                 {% endfor %}
-                <hr>
+               <hr>
           {% endfor %}
         </div>
       </div>
