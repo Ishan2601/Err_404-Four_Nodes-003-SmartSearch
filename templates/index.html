@@ -22,6 +22,8 @@
 	</style>
   </head>
   <body>
+
+  
       <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
         <div class="card-body">
           <img src="static/icon.png" alt="search icon" width="90" height="90">
@@ -43,22 +45,25 @@
       {% if result %}
       <div class="card text-center shadow-lg p-6 mb-8 " style="width: 50rem;">
         <div class="card-body">
-          <h4 class="card-title">Smart Search Results for:{{searched}}</h4>
+          <h4 class="card-title">Smart Search Results for : {{searched}}</h4>
           <hr>
           <h5>People also search for</h5>
-          
           <hr>
           {% if top_result %}
           {% for i in top_result[searched]['top']['topic_title']  %}
             <a href='http://google.com/search?q={{i}}' target="new" type="button" class="btn btn-outline-secondary">{{i}}</a>
           {% endfor %}
           {% endif %}
+          <hr>
           {% for key, value in result.items() %}
             {% if result[key] %}
-                <h5 style="padding: 0.5%">{{ key }}</h5>
-                {% for i in value %}
-                <a href='http://google.com/search?q={{i}}' target="new" style="padding: 0.5%">{{ i }}?</a><br>
-                {% endfor %}
+                <div><button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#{{key}}">{{key}}?</button>
+                <div id="{{key}}" class="collapse">
+                  <br>
+                  {% for i in value %}
+                    <a href='http://google.com/search?q={{i}}' target="new" style="padding: 0.5%">{{ i }}?</a><br>
+                  {% endfor %}
+                </div>
                <hr>
             {% endif %}
           {% endfor %}
