@@ -26,10 +26,10 @@ def getPlotCSV():
 def search():
     if request.method == "POST":
         search_term = request.form.get("searchquery")
-        result, top_result = scrp.search_term(search_term)
+        result, top_result, prople_asks = scrp.search_term(search_term)
         with open('CSV/data.csv', 'w') as f:
             for key in result.keys():
                 for v in result[key]:
                     f.write("%s,%s\n"%(key,v))
         
-    return render_template("index.html", result = result, top_result = top_result, searched = search_term)
+    return render_template("index.html", result = result, top_result = top_result, prople_asks=prople_asks, searched = search_term)
