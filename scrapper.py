@@ -40,8 +40,8 @@ class Scrapper:
         yahoo_search_ques = self.__get_yahoo_search_ques(cleaned_term)
         
         questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
-        top_searches = self._get_top_searches(cleaned_term)
-        prople_asks = self._people_also_ask(cleaned_term)
+        top_searches = self._get_top_searches(search_term)
+        prople_asks = self._people_also_ask(search_term)
 
         return questions, top_searches, prople_asks
 
