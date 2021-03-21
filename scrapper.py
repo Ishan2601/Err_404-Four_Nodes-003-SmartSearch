@@ -111,15 +111,19 @@ class Scrapper:
         url = config.url + search_term
         self.brow.get(url)
         web = {i:[] for i in self.question_words}
-        qbox = self.brow.find_element_by_xpath(config.qbox_xpath)
-        questions_box = qbox.find_elements_by_class_name(config.ques_class)
-        questions = [i.text for i in questions_box]
-        questions = [i.split("\n")[0] for i in questions]
+        sleep(1)
+        try:
+            qbox = self.brow.find_element_by_xpath(config.qbox_xpath)
+            questions_box = qbox.find_elements_by_class_name(config.ques_class)
+            questions = [i.text for i in questions_box]
+            questions = [i.split("\n")[0] for i in questions]
 
-        for q in questions:
-            ask = q.split()[0]
-            if ask.lower() in web:
-                web[ask.lower()].append(q)
+            for q in questions:
+                ask = q.split()[0]
+                if ask.lower() in web:
+                    web[ask.lower()].append(q)
+        except Exception:
+            pass
         return web
     
     def __get_top_searches(self, search_term: str):
