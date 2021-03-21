@@ -14,9 +14,9 @@ $ app.py
 2. Related top Searches
 3. Generating csv file of questions.
 4. Top Relevant Searches
+5. Lemmatization and Similar questions clustering.
+6. complete sentence searching
 
 ## Features to be implement 
-1. Lemmatization and Similar questions clustering.
-2. complete sentence searching
-3. Better visuals
-4. AWS EC2 (if time permits)
+1. Better visuals
+2. AWS EC2 (if time permits)
