@@ -10,7 +10,7 @@ $ pip install -r requirements.txt
 $ app.py
 ```
 ## Features Implemented
-1. questions classification
+1. questions classification according to question type
 2. Related top Searches
 3. Generating csv file of questions.
 4. Top Relevant Searches
