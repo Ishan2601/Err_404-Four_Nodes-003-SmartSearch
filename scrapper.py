@@ -17,10 +17,10 @@ class Scrapper:
 
     def __init__(self):
         options = self.__get_browser_options()
-        self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=options)
-        #self.fireFoxOptions = webdriver.FirefoxOptions()
-        #self.fireFoxOptions.set_headless()
-        #self.brow = webdriver.Firefox('C:/WebDriver/bin', firefox_options=self.fireFoxOptions)
+        #self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=options)
+        self.fireFoxOptions = webdriver.FirefoxOptions()
+        self.fireFoxOptions.set_headless()
+        self.brow = webdriver.Firefox('C:/WebDriver/bin', firefox_options=self.fireFoxOptions)
         
     #    self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)  
     
@@ -31,7 +31,7 @@ class Scrapper:
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
         options.add_argument("--disable-dev-shm-usage")
-        options.binary_location = environ.get("GOOGLE_CHROME_BIN")
+        #options.binary_location = environ.get("GOOGLE_CHROME_BIN")
 
         return options
 
@@ -47,18 +47,19 @@ class Scrapper:
         """ Processes the search term """
         cleaned_term = Utils.clean_term(search_term, self.question_words)
         questions = self.__get_questions(cleaned_term)
+        clusters, corpus, distances = Utils.get_clusters(search_term, questions)
         top_searches = self.__get_top_searches(search_term)
-        people__ask = self.__people_also_ask(search_term)
+        people_ask = self.__people_also_ask(search_term)
 
-        return questions, top_searches, people__ask
+        return questions, top_searches, people_ask, clusters, corpus, distances
     
     def __get_questions(self, search_term : str) -> Dict[str,List[str]]:
         """ Acquires questions from multiple sources """
-        #google_search_ques = self.__get_google_search_ques(search_term)
+        google_search_ques = self.__get_google_search_ques(search_term)
         yahoo_search_ques = self.__get_yahoo_search_ques(search_term)
         quora_seach_ques = self.__get_quora_search_ques(search_term)
 
-        questions = self.__result_combiner(yahoo_search_ques, quora_seach_ques)
+        questions = self.__result_combiner(google_search_ques, yahoo_search_ques, quora_seach_ques)
         return questions
 
     def __get_google_search_ques(self, search_term : str) -> Dict[str,List[str]]:
@@ -127,10 +128,10 @@ class Scrapper:
         return web
     
     def __get_top_searches(self, search_term: str):
-        
-        pytrends = TrendReq()
-        kw_list = [search_term]
-        try:
+        """ Gets the top searches from Google Trends """
+        try: 
+            pytrends = TrendReq()
+            kw_list = [search_term]
             pytrends.build_payload(kw_list)
             web = pytrends.related_topics()
             # web = pytrends.suggestions(kw_list)
@@ -139,5 +140,6 @@ class Scrapper:
         return web
     
     def __people_also_ask(self, search_term: str):
+        """ Gets the popularly asked similar questions from Google """
         web = people_also_ask.get_related_questions(search_term, 5)
         return web 

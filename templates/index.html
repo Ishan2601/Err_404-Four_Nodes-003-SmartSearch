@@ -7,9 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
+  
     <title>Smart Search</title>
-	<style>
+  <style>
         body {
               background-color: #E6E6FA;
         }
@@ -19,7 +19,7 @@
               margin-bottom: 10px; 
               margin-top: 50px;
         }
-	</style>
+  </style>
   </head>
   <body>
 
@@ -35,9 +35,11 @@
               </div>
               <button type="submit" class="btn btn-primary">Search</button>
           </form> 
-          {% if result %}
+              {% if result %}
               <br>
               <a class="btn btn-outline-info" href="/getPlotCSV">Get CSV</a>
+              <a class="btn btn-outline-info" href="/getJson">Get Json</a>
+
               {% endif %}         
         </div>
       </div>
@@ -55,14 +57,18 @@
             {% endfor %}
           {% endif %}
           <hr>
+          {% if top_result %}
           <h5>People also search for</h5>
           <hr>
-          {% if top_result %}
           {% for i in top_result[searched]['top']['topic_title']  %}
             <a href='http://google.com/search?q={{i}}' target="new" type="button" class="btn btn-outline-secondary">{{i}}</a>
           {% endfor %}
           {% endif %}
           <hr>
+
+          
+
+
           <h5>Searching Classification</h5>
           {% for key, value in result.items() %}
             {% if result[key] %}
@@ -76,6 +82,30 @@
                <hr>
             {% endif %}
           {% endfor %}
+           <hr>
+
+          {% if distances %}
+            <h5>Clusters and Most similar</h5>
+              <hr>
+              <div><button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#topfive">Top 5 most similar sentences in corpus:</button>
+              <div id="topfive" class="collapse">
+                  <br>
+                  {% for idx, distance in distances[0:5]  %}
+                      <p>{{ corpus[idx].strip() }} ,&nbsp; {{ "Score: %.4f" % (1-distance) }}</p>
+                  {% endfor %}
+              </div>
+              <hr>
+              {% for i,questions in clusters.items()  %}
+                <div><button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#cluster{{i+i}}">Cluster {{ i + 1 }} contains</button>
+                <div id="cluster{{i+i}}" class="collapse">
+                  <br>
+                  {% for k in questions: %}
+                    <p>- {{ k }}</p>
+                  {% endfor %}
+                </div> 
+                <hr>
+              {% endfor %}
+          {% endif %}
         </div>
       </div>
        {% endif %}
