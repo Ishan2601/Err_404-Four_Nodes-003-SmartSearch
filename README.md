@@ -13,7 +13,7 @@ $ app.py
 1. questions classification
 2. Related top Searches
 3. Generating csv file of questions.
-4. Top Searches
+4. Top Relevant Searches
 
 ## Features to be implement 
 1. Lemmatization and Similar questions clustering.
