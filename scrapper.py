@@ -17,9 +17,9 @@ class Scrapper:
 
     def __init__(self):
          options = self.__get_browser_options()
-    #    self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=options)
+        self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=options)
         
-         self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)  
+    #    self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)  
     
     def __get_browser_options(self) -> Options:
         """ Returns browser options"""
