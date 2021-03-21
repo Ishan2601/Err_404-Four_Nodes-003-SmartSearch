@@ -4,7 +4,7 @@ from typing import List, Dict
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 
 from config import GoogleSearchConfig, YahooSearchConfig, QuoraConfig
 

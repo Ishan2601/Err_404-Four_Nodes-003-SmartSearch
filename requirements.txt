@@ -18,3 +18,4 @@ pytrends==4.7.3
 Werkzeug==1.0.1
 people-also-ask==0.0.6
 nltk
+webdriver-manager
