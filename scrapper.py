@@ -5,11 +5,14 @@ from config import GoogleSearchConfig, YahooSearchConfig
 from os import environ
 from pytrends.request import TrendReq
 import people_also_ask
+import nltk
+from nltk import word_tokenize
+from nltk.corpus import stopwords
 
 #from webdriver_manager.chrome import ChromeDriverManager
 
 class Scrapper:
-    question_words = ["How", "What", "Why", "When", "Where", "Which", "Is"]
+    question_words = ["how", "what", "why", "when", "where", "which", "is"]
 
     def __init__(self):
         self.options = Options()
@@ -31,12 +34,14 @@ class Scrapper:
         return final_result
 
     def search_term(self, search_term : str):
-        google_search_ques = self.__get_google_search_ques(search_term)
-        yahoo_search_ques = self.__get_yahoo_search_ques(search_term)
+        cleaned_term = self._clean_term(search_term)
+
+        google_search_ques = self.__get_google_search_ques(cleaned_term)
+        yahoo_search_ques = self.__get_yahoo_search_ques(cleaned_term)
         
         questions = self.__result_combiner(google_search_ques, yahoo_search_ques)
-        top_searches = self._get_top_searches(search_term)
-        prople_asks = self._people_also_ask(search_term)
+        top_searches = self._get_top_searches(cleaned_term)
+        prople_asks = self._people_also_ask(cleaned_term)
 
         return questions, top_searches, prople_asks
 
@@ -89,10 +94,13 @@ class Scrapper:
     
     def _people_also_ask(self, search_term: str):
         web = people_also_ask.get_related_questions(search_term, 5)
-        return web  
+        return web 
 
-    
-
-
-
-
+    def _clean_term(self, search_term: str):
+        clean = []
+        for word in word_tokenize(search_term):
+            if word not in set(stopwords.words('english')):
+                if word not in self.question_words:
+                    clean.append(word)
+        clean_s = ' '.join(clean)
+        return clean_s
