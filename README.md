@@ -30,6 +30,9 @@ $ app.py
 ![slide6](assets/6.jpeg)<br>
 
 ## UI
-
+![ui1](assets/ui1.jpeg)<br>
+![ui2](assets/ui2.jpeg)<br>
+![ui3](assets/ui3.jpeg)<br>
+![ui4](assets/ui4.jpeg)<br>
 
 
