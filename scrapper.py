@@ -87,7 +87,8 @@ class Scrapper:
     def _get_top_searches(self, search_term: str):
         pytrends = TrendReq()
         kw_list = [search_term]
-        pytrends.build_payload(kw_list)
+        pytrends.build_payload(kw_list, cat=0, timeframe='today 5-y', geo='', gprop='')
+        # pytrends.build_payload(kw_list)
         web = pytrends.related_topics()
         # web = pytrends.suggestions(kw_list)
         return web
