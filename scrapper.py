@@ -16,7 +16,7 @@ class Scrapper:
     question_words = ["how", "what", "why", "when", "where", "which", "is"]
 
     def __init__(self):
-         options = self.__get_browser_options()
+        options = self.__get_browser_options()
         self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=options)
         
     #    self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)  
