@@ -18,6 +18,9 @@ class Scrapper:
     def __init__(self):
         options = self.__get_browser_options()
         self.brow = webdriver.Chrome(executable_path=environ.get("CHROMEDRIVER_PATH"),options=options)
+        #self.fireFoxOptions = webdriver.FirefoxOptions()
+        #self.fireFoxOptions.set_headless()
+        #self.brow = webdriver.Firefox('C:/WebDriver/bin', firefox_options=self.fireFoxOptions)
         
     #    self.brow = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=options)  
     
@@ -42,7 +45,7 @@ class Scrapper:
 
     def process(self, search_term : str):
         """ Processes the search term """
-        cleaned_term = Utils.clean_term(search_term)
+        cleaned_term = Utils.clean_term(search_term, self.question_words)
         questions = self.__get_questions(cleaned_term)
         top_searches = self.__get_top_searches(search_term)
         people__ask = self.__people_also_ask(search_term)
@@ -96,8 +99,8 @@ class Scrapper:
                 pass
             
             ques_box.clear()
-        print("Yahoo")
-        print(web)
+        #print("Yahoo")
+        #print(web)
         return web
 
     def __get_quora_search_ques(self, search_term : str) -> Dict[str,List[str]]:
